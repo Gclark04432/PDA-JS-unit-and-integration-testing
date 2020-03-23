@@ -39,4 +39,31 @@ describe('calculator', function () {
     assert.strictEqual(calculator.runningTotal, 3)
   })
 
+  it('can concatenate numbers to perform functions on numbers of more than 9', function() {
+    calculator.numberClick(2)
+    calculator.numberClick(1)
+    calculator.operatorClick("/");
+    calculator.divide(7);
+    assert.strictEqual(calculator.runningTotal, 3)
+  })
+
+  it('can chain multiple operator functions together', function() {
+    calculator.operatorClick("+");
+    calculator.add(2);
+    calculator.operatorClick("+");
+    calculator.add(5);
+    assert.strictEqual(calculator.runningTotal, 7)
+  })
+
+  it('can clear the running total without affecting the calculation', function() {
+    calculator.operatorClick("+");
+    calculator.numberClick(2)
+    calculator.operatorClick("+");
+    calculator.numberClick(5)
+    calculator.clearClick();
+    calculator.operatorClick("+");
+    calculator.add(5)
+    assert.strictEqual(calculator.runningTotal, 7)
+  })
+
 });
